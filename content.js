@@ -3,7 +3,7 @@
    Sources: Weeks 1–4 & 6 lecture slides, assigned readings (summarized). */
 
 const COURSE = {
-  title: "N1040 Study Quest",
+  title: "Ayah’s Learning Guide",
   subtitle: "Foundational Concepts of Professional Nursing Practice · Weeks 1–6",
   weeks: [
   /* ====================================================== WEEK 1 */

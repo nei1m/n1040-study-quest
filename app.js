@@ -25,7 +25,7 @@ function itemMins(it) {
 const lessonMins = L => Math.max(3, Math.round(L.items.reduce((s, it) => s + itemMins(it), 0) * 1));
 
 /* ---------- state ---------- */
-const fresh = () => ({ petals: 0, done: {}, wrong: {}, journal: {}, badges: {}, secs: 0, streak: { last: null, n: 0 }, name: "", answered: 0, correct: 0, examBest: null });
+const fresh = () => ({ petals: 0, done: {}, wrong: {}, journal: {}, badges: {}, secs: 0, streak: { last: null, n: 0 }, name: "Ayah", answered: 0, correct: 0, examBest: null });
 let S;
 try { S = Object.assign(fresh(), JSON.parse(localStorage.getItem(KEY) || "{}")); } catch { S = fresh(); }
 const save = () => localStorage.setItem(KEY, JSON.stringify(S));
@@ -95,7 +95,7 @@ function modal(html, btn = "Yay!", onClose) {
 function topbar() {
   const lv = level();
   const t = el("header", "topbar");
-  t.innerHTML = `<div class="tb-left"><span class="logo">🌸</span><div><b>N1040 Study Quest</b><small>${esc(lv.name)}</small></div></div>
+  t.innerHTML = `<div class="tb-left"><span class="logo">🌸</span><div><b>Ayah’s Learning Guide</b><small>${esc(lv.name)}</small></div></div>
     <div class="tb-stats"><span title="Petals">🌸 ${S.petals}</span><span title="Day streak">🔥 ${S.streak.n}</span></div>
     <div class="lvbar"><i style="width:${Math.round(lv.pct * 100)}%"></i></div>`;
   return t;
@@ -121,7 +121,7 @@ function renderPath() {
   const main = el("main", "path");
   const doneCount = allLessons.filter(x => S.done[x.L.id]).length;
   const intro = el("section", "hero");
-  intro.innerHTML = `<h1>Midterm prep, one petal at a time</h1>
+  intro.innerHTML = `<h1>${S.name ? esc(S.name) + "’s" : "Your"} learning guide 🌸</h1>
     <p>${esc(COURSE.subtitle)}</p>
     <div class="hero-stats"><div><b>${doneCount}/${allLessons.length}</b><span>lessons</span></div><div><b>~${Math.round(totalMins / 60 * 10) / 10}h</b><span>total</span></div><div><b>${fmtTime(S.secs)}</b><span>studied</span></div></div>
     <div class="progress"><i style="width:${doneCount / allLessons.length * 100}%"></i></div>`;
@@ -553,7 +553,7 @@ function renderCert() {
   const d = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
   const m = el("main", "certwrap");
   m.innerHTML = `<div class="cert"><div class="c-flower">🌸</div><div class="kicker">Certificate of completion</div>
-    <h1>${esc(name)}</h1><p>completed every lesson of the</p><h2>N1040 Study Quest</h2>
+    <h1>${esc(name)}</h1><p>completed every lesson of</p><h2>Ayah’s N1040 Learning Guide</h2>
     <p>Foundational Concepts of Professional Nursing Practice · Weeks 1–6</p>
     <div class="c-row"><div><b>${S.examBest ?? "—"}%</b><span>mock midterm</span></div><div><b>${S.petals}</b><span>petals</span></div><div><b>${fmtTime(S.secs)}</b><span>studied</span></div></div>
     <p class="c-badges">${COURSE.weeks.map(w => S.badges[w.id] ? w.badge.icon : "").join(" ")} ${S.badges.exam ? "🏆" : ""}</p>

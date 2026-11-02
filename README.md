@@ -1,4 +1,4 @@
-# 🌸 N1040 Study Quest
+# 🌸 Ayah’s Learning Guide — N1040
 
 A pink, phone-friendly study game for **N1040 – Foundational Concepts of Professional Nursing Practice, Weeks 1–6**. It covers the lecture slides and readings for the midterm.
 
